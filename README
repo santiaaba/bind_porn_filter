@@ -6,6 +6,14 @@ si el dominio se encuentra en la misma. Si el dominio se encuentra entonces se r
 la ultima parte de la URL a xxx (en el caso de terminar con tres letras como ser .com)
 o a xx (en el caso de terminar con dos letras como .ar .db, etc)
 
+Bind utilizado
+--------------
+
+El arquivo query.c pertenece a la versión bind-9.10.2-P4
+
+Cambios en Query.c
+------------------
+
 Todos los cambios realizados al verdadero archivo query.c fueron encerrados entre los
 comentarios:
 
@@ -15,3 +23,30 @@ comentarios:
 
 Vale agregar que dichos cambios al archivo siempre fueron el agregado de código y no
 borrado o cambio del código original.
+
+Librerías necesarias
+--------------------
+
+Es necesaria la librería berkeleydb. En el ejemplo utilizamos un Ubuntu y las libreríoas
+son las siguientes:
+
+ii  libdb-dev:amd64                     1:5.3.21~exp1ubuntu2            amd64        Berkeley Database Libraries [development]
+ii  libdb5.3:amd64                      5.3.28-11                       amd64        Berkeley v5.3 Database Libraries [runtime]
+ii  libdb5.3-dev                        5.3.28-11                       amd64        Berkeley v5.3 Database Libraries [development]
+
+
+Como compilarlo
+----------------
+
+Luego de realizar ./configure hay que editar el archivo Makefile en el directorio
+donde se encuentra query.c y agregar la referencia a la librería db. Quedando las
+líneas a continuación como siguen:
+
+LIBS =          ${LWRESLIBS} ${DNSLIBS} ${BIND9LIBS} \
+                ${ISCCFGLIBS} ${ISCCCLIBS} ${ISCLIBS} \
+                ${DLZDRIVER_LIBS} ${DBDRIVER_LIBS} -ldl -lpthread -ldb
+
+NOSYMLIBS =     ${LWRESLIBS} ${DNSLIBS} ${BIND9LIBS} \
+                ${ISCCFGLIBS} ${ISCCCLIBS} ${ISCNOSYMLIBS} \
+                ${DLZDRIVER_LIBS} ${DBDRIVER_LIBS} -ldl -lpthread -ldb
+
