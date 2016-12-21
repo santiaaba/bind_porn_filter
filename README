@@ -1,0 +1,17 @@
+Introducción
+-------------
+
+Las modificaciones en query.c permiten leer de una base de datos Berkeley y determinar
+si el dominio se encuentra en la misma. Si el dominio se encuentra entonces se renombra
+la ultima parte de la URL a xxx (en el caso de terminar con tres letras como ser .com)
+o a xx (en el caso de terminar con dos letras como .ar .db, etc)
+
+Todos los cambios realizados al verdadero archivo query.c fueron encerrados entre los
+comentarios:
+
+/* Santiago Begin */
+...
+/* Santiago End */
+
+Vale agregar que dichos cambios al archivo siempre fueron el agregado de código y no
+borrado o cambio del código original.
